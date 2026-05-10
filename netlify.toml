@@ -3,13 +3,13 @@
 [build]
   publish = "."
 
-# ── Redirect /index to / to avoid duplicate pages ──
+# ── Redirect old /index to / ──
 [[redirects]]
   from = "/index.html"
   to   = "/"
   status = 301
 
-# ── Pretty URLs: /about instead of /about.html ──
+# ── Pretty URLs ──────────────────────────────────────────────────────────
 [[redirects]]
   from = "/about"
   to   = "/about.html"
@@ -23,6 +23,26 @@
 [[redirects]]
   from = "/privacy-policy"
   to   = "/privacy-policy.html"
+  status = 200
+
+[[redirects]]
+  from = "/compound-interest"
+  to   = "/compound-interest.html"
+  status = 200
+
+[[redirects]]
+  from = "/loan-payoff"
+  to   = "/loan-payoff.html"
+  status = 200
+
+[[redirects]]
+  from = "/mortgage"
+  to   = "/mortgage.html"
+  status = 200
+
+[[redirects]]
+  from = "/credit-card"
+  to   = "/credit-card.html"
   status = 200
 
 # ── Security headers ───────────────────────────────────────────────────────

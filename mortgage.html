@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DV06NLXWFV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DV06NLXWFV');
+</script>
+  <meta name="google-adsense-account" content="ca-pub-9660113858007418">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mortgage Affordability Calculator — How Much House Can You Afford?</title>
+  <meta name="description" content="Estimate how much home you can afford based on your income, debts, down payment, and interest rate. See your maximum purchase price and monthly payment breakdown." />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9660113858007418" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #1D9E75;
+      --green-light: #E1F5EE;
+      --green-dark: #0F6E56;
+      --orange: #d97706;
+      --orange-light: #fef3e8;
+      --navy: #0d1f2d;
+      --text: #0d1f2d;
+      --text-muted: #5a7080;
+      --border: rgba(13,31,45,0.10);
+      --surface: #f7f9f8;
+      --white: #ffffff;
+      --radius: 12px;
+      --shadow: 0 2px 16px rgba(13,31,45,0.08);
+      --accent: #d97706;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--surface); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
+
+    .site-nav { background: var(--navy); border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .site-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .site-logo { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: #fff; text-decoration: none; padding: 1rem 0; }
+    .site-logo em { color: #5DCAA5; font-style: italic; }
+    .nav-links { display: flex; list-style: none; }
+    .nav-links a { display: block; padding: 1rem .9rem; font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .15s; white-space: nowrap; }
+    .nav-links a:hover { color: #5DCAA5; }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+    .tool-nav { background: var(--white); border-bottom: 1px solid var(--border); }
+    .tool-nav ul { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; list-style: none; display: flex; overflow-x: auto; }
+    .tool-nav ul li a { display: block; padding: .75rem 1rem; font-size: 13px; color: var(--text-muted); text-decoration: none; border-bottom: 2px solid transparent; transition: all .15s; white-space: nowrap; }
+    .tool-nav ul li a:hover { color: var(--orange); }
+    .tool-nav ul li a.active { color: var(--navy); border-bottom-color: var(--orange); font-weight: 500; }
+
+    header { background: var(--navy); color: #fff; padding: 2.5rem 1.5rem 2rem; text-align: center; }
+    header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; line-height: 1.15; margin-bottom: .5rem; }
+    header h1 em { font-style: italic; color: #f6b84b; }
+    header p { font-size: 15px; color: rgba(255,255,255,0.55); max-width: 480px; margin: 0 auto; }
+
+    .ad-slot { background: #eef0ef; border: 1.5px dashed #c5cdc9; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #90a09a; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; gap: 4px; }
+    .ad-slot span { font-size: 10px; opacity: .7; }
+    .ad-top { width: 100%; height: 90px; max-width: 728px; margin: 1.5rem auto; }
+    .ad-sidebar { width: 300px; min-width: 300px; height: 600px; }
+    .ad-bottom { width: 100%; height: 90px; max-width: 728px; margin: 0 auto; }
+
+    .page { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem 3rem; }
+    .main-grid { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start; }
+    @media (max-width: 820px) { .main-grid { grid-template-columns: 1fr; } .ad-sidebar { width: 100%; height: 250px; } }
+
+    .card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); padding: 1.75rem; margin-bottom: 1.5rem; }
+    .card-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 1.25rem; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+    .card-title::before { content: ''; display: block; width: 4px; height: 1.2rem; background: var(--orange); border-radius: 2px; }
+
+    .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 2rem; }
+    @media (max-width: 560px) { .controls { grid-template-columns: 1fr; } }
+
+    .field label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .05em; }
+    .field-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+
+    .num-input { width: 96px; flex-shrink: 0; padding: 5px 8px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--navy); background: var(--surface); outline: none; transition: border-color .15s; }
+    .num-input:focus { border-color: var(--orange); box-shadow: 0 0 0 2px rgba(217,119,6,0.12); }
+
+    input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 2px; background: #dde6e2; outline: none; cursor: pointer; flex: 1; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--orange); border: 3px solid #fff; box-shadow: 0 0 0 1.5px var(--orange); }
+    input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--orange); border: 3px solid #fff; box-shadow: 0 0 0 1.5px var(--orange); }
+
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+    .metric { background: var(--surface); border-radius: 10px; padding: .875rem 1rem; border: 1px solid var(--border); }
+    .metric-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+    .metric-value { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--navy); font-weight: 400; }
+    .metric-value.accent { color: var(--orange); }
+    .metric-value.green { color: var(--green-dark); }
+    .metric-value.red { color: #c0392b; }
+
+    /* DTI meter */
+    .dti-bar-wrap { margin-top: 1.25rem; }
+    .dti-bar-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
+    .dti-track { height: 8px; background: #e8eee9; border-radius: 4px; overflow: hidden; }
+    .dti-fill { height: 100%; border-radius: 4px; transition: width .3s, background .3s; }
+
+    /* Donut chart */
+    .donut-wrap { position: relative; width: 100%; height: 260px; }
+
+    .disclaimer { font-size: 11px; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem; line-height: 1.5; }
+    .legend { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--text-muted); margin-bottom: .75rem; }
+    .legend span { display: flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+    footer { text-align: center; font-size: 12px; color: var(--text-muted); padding: 2rem 1.25rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    footer a { color: var(--green-dark); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-logo" href="index.html">Finance <em>Calculators</em></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy-policy.html">Privacy</a></li>
+    </ul>
+  </div>
+</nav>
+<nav class="tool-nav">
+  <ul>
+    <li><a href="compound-interest.html">📈 Compound Interest</a></li>
+    <li><a href="loan-payoff.html">🏦 Loan Payoff</a></li>
+    <li><a href="mortgage.html" class="active">🏠 Mortgage</a></li>
+    <li><a href="credit-card.html">💳 Credit Card</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>Mortgage <em>Affordability</em> Calculator</h1>
+  <p>Estimate how much home you can afford based on your income, debts, and down payment.</p>
+</header>
+
+<div class="page">
+  <div class="ad-top ad-slot">Advertisement<span>728 × 90</span></div>
+
+  <div class="main-grid">
+    <div>
+      <!-- Inputs -->
+      <div class="card">
+        <div class="card-title">Your financial picture</div>
+        <div class="controls">
+          <div class="field">
+            <label for="income-num">Annual household income</label>
+            <div class="field-row">
+              <input type="number" class="num-input" id="income-num" value="85000" min="10000">
+              <input type="range" id="income" min="20000" max="500000" step="1000" value="85000">
+            </div>
+          </div>
+          <div class="field">
+            <label for="monthly-debts-num">Monthly debt payments</label>
+            <div class="field-row">
+              <input type="number" class="num-input" id="monthly-debts-num" value="400" min="0">
+              <input type="range" id="monthly-debts" min="0" max="5000" step="50" value="400">
+            </div>
+          </div>
+          <div class="field">
+            <label for="down-num">Down payment</label>
+            <div class="field-row">
+              <input type="number" class="num-input" id="down-num" value="40000" min="0">
+              <input type="range" id="down" min="0" max="300000" step="1000" value="40000">
+            </div>
+          </div>
+          <div class="field">
+            <label for="mort-rate-num">Interest rate (%)</label>
+            <div class="field-row">
+              <input type="number" class="num-input" id="mort-rate-num" value="6.8" min="0.1" max="20" step="0.05">
+              <input type="range" id="mort-rate" min="1" max="15" step="0.05" value="6.8">
+            </div>
+          </div>
+          <div class="field">
+            <label for="mort-term-num">Loan term (years)</label>
+            <div class="field-row">
+              <input type="number" class="num-input" id="mort-term-num" value="30" min="5" max="30">
+              <input type="range" id="mort-term" min="5" max="30" step="5" value="30">
+            </div>
+          </div>
+          <div class="field">
+            <label for="prop-tax-num">Annual property tax (%)</label>
+            <div class="field-row">
+              <input type="number" class="num-input" id="prop-tax-num" value="1.1" min="0" max="5" step="0.05">
+              <input type="range" id="prop-tax" min="0" max="4" step="0.05" value="1.1">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="card">
+        <div class="card-title">Estimated affordability</div>
+        <div class="metrics">
+          <div class="metric">
+            <div class="metric-label">Max home price</div>
+            <div class="metric-value accent" id="m-home-price">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Loan amount</div>
+            <div class="metric-value" id="m-loan-amt">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Monthly P&amp;I</div>
+            <div class="metric-value" id="m-pi">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Monthly total*</div>
+            <div class="metric-value" id="m-total-mo">—</div>
+          </div>
+        </div>
+
+        <!-- DTI indicator -->
+        <div class="dti-bar-wrap">
+          <div class="dti-bar-label">
+            <span>Debt-to-income ratio (DTI)</span>
+            <span id="dti-pct">—</span>
+          </div>
+          <div class="dti-track">
+            <div class="dti-fill" id="dti-fill" style="width:0%"></div>
+          </div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:5px;" id="dti-note">—</div>
+        </div>
+
+        <div style="margin-top:1.5rem;">
+          <div class="legend">
+            <span><span class="legend-dot" style="background:#d97706;"></span>P&amp;I</span>
+            <span><span class="legend-dot" style="background:#2d6be4;"></span>Property tax</span>
+            <span><span class="legend-dot" style="background:#1D9E75;"></span>PMI (est.)</span>
+          </div>
+          <div class="donut-wrap">
+            <canvas id="mortChart"></canvas>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          * Monthly total includes principal &amp; interest, estimated property tax, and PMI (if down payment &lt; 20%). Does not include home insurance, HOA, or maintenance. Maximum home price is calculated using a 28% front-end DTI limit and 36% back-end DTI limit (whichever is lower). For illustrative purposes only. Consult a mortgage professional for personalised advice.
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar ad -->
+    <div>
+      <div class="ad-sidebar ad-slot">Advertisement<span>300 × 600</span></div>
+    </div>
+  </div>
+
+  <div class="ad-bottom ad-slot" style="margin-top:1.5rem;">Advertisement<span>728 × 90</span></div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Finance Calculators &nbsp;&middot;&nbsp; <a href="privacy-policy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a> &nbsp;&middot;&nbsp; <a href="index.html">All Calculators</a></p>
+  <p style="margin-top:.5rem;">Not financial advice. For educational use only.</p>
+</footer>
+
+<script>
+let chart;
+
+function fmt(n) {
+  if (n >= 1000000) return '$' + (n / 1000000).toFixed(2) + 'M';
+  if (n >= 1000) return '$' + Math.round(n).toLocaleString();
+  return '$' + Math.round(n);
+}
+
+function monthlyPayment(principal, annualRate, years) {
+  const r = annualRate / 100 / 12;
+  const n = years * 12;
+  if (r === 0) return principal / n;
+  return principal * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
+}
+
+function update() {
+  const income      = parseFloat(document.getElementById('income-num').value) || 0;
+  const debts       = parseFloat(document.getElementById('monthly-debts-num').value) || 0;
+  const down        = parseFloat(document.getElementById('down-num').value) || 0;
+  const rate        = parseFloat(document.getElementById('mort-rate-num').value) || 0;
+  const term        = parseInt(document.getElementById('mort-term-num').value) || 30;
+  const propTaxPct  = parseFloat(document.getElementById('prop-tax-num').value) || 0;
+
+  if (income <= 0 || rate <= 0) return;
+
+  const monthlyIncome = income / 12;
+
+  // 28% front-end: max PITI (including tax & PMI) = 28% of gross income
+  // 36% back-end:  max total debts = 36% of gross income
+  const maxFrontEnd   = monthlyIncome * 0.28;
+  const maxBackEnd    = monthlyIncome * 0.36 - debts;
+  const maxHousingPmt = Math.min(maxFrontEnd, maxBackEnd);
+
+  // Iterate to find max home price (property tax % of price, PMI if < 20% down)
+  // P&I + propTax/12 + PMI/12 <= maxHousingPmt
+  // Binary search for home price
+  let lo = 0, hi = 5000000;
+  for (let i = 0; i < 60; i++) {
+    const mid = (lo + hi) / 2;
+    const loan = Math.max(0, mid - down);
+    const ltv = down / mid;
+    const pmi = ltv < 0.2 ? loan * 0.0085 / 12 : 0; // ~0.85% annual PMI
+    const pi  = monthlyPayment(loan, rate, term);
+    const tax = mid * propTaxPct / 100 / 12;
+    const total = pi + tax + pmi;
+    if (total <= maxHousingPmt) lo = mid; else hi = mid;
+  }
+  const homePrice = Math.round(lo);
+  const loanAmt   = Math.max(0, homePrice - down);
+  const ltv       = down / homePrice;
+  const pmi       = ltv < 0.2 ? loanAmt * 0.0085 / 12 : 0;
+  const pi        = monthlyPayment(loanAmt, rate, term);
+  const tax       = homePrice * propTaxPct / 100 / 12;
+  const totalMo   = pi + tax + pmi;
+
+  const actualDTI = (totalMo + debts) / monthlyIncome * 100;
+
+  document.getElementById('m-home-price').textContent = fmt(homePrice);
+  document.getElementById('m-loan-amt').textContent   = fmt(loanAmt);
+  document.getElementById('m-pi').textContent         = '$' + Math.round(pi).toLocaleString() + '/mo';
+  document.getElementById('m-total-mo').textContent   = '$' + Math.round(totalMo).toLocaleString() + '/mo';
+
+  const dtiPct  = Math.min(actualDTI, 60);
+  const dtiEl   = document.getElementById('dti-fill');
+  const dtiColor = dtiPct <= 28 ? '#1D9E75' : dtiPct <= 36 ? '#d97706' : '#e05252';
+  dtiEl.style.width = dtiPct.toFixed(1) + '%';
+  dtiEl.style.background = dtiColor;
+  document.getElementById('dti-pct').textContent = actualDTI.toFixed(1) + '%';
+
+  const dtiNote = dtiPct <= 28 ? '✓ Excellent — well within standard lending guidelines.'
+    : dtiPct <= 36 ? '⚠ Acceptable — most lenders allow up to 36% back-end DTI.'
+    : '✗ High DTI — many lenders may decline above 43%. Consider reducing debts or down payment.';
+  document.getElementById('dti-note').textContent = dtiNote;
+  document.getElementById('dti-note').style.color = dtiColor;
+
+  const piRound  = Math.round(pi);
+  const taxRound = Math.round(tax);
+  const pmiRound = Math.round(pmi);
+
+  if (chart) {
+    chart.data.datasets[0].data = [piRound, taxRound, pmiRound || 0.001];
+    chart.update();
+  } else {
+    chart = new Chart(document.getElementById('mortChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Principal & Interest', 'Property Tax', 'PMI'],
+        datasets: [{
+          data: [piRound, taxRound, pmiRound || 0.001],
+          backgroundColor: ['#d97706','#2d6be4','#1D9E75'],
+          borderWidth: 2,
+          borderColor: '#fff',
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        cutout: '65%',
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { family: 'DM Sans', size: 12 }, color: '#5a7080', padding: 16 } },
+          tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': $' + ctx.parsed.toLocaleString() + '/mo' } }
+        }
+      }
+    });
+  }
+}
+
+['income','monthly-debts','down','mort-rate','mort-term','prop-tax'].forEach(id => {
+  document.getElementById(id).addEventListener('input', function() {
+    document.getElementById(id+'-num').value = this.value; update();
+  });
+  document.getElementById(id+'-num').addEventListener('input', function() {
+    const v = parseFloat(this.value);
+    if (!isNaN(v)) { document.getElementById(id).value = v; update(); }
+  });
+});
+update();
+</script>
+</body>
+</html>
