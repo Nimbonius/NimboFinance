@@ -24,6 +24,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 
   <style>
+    .site-nav { background: var(--navy); border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .site-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .site-logo { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: #fff; text-decoration: none; padding: 1rem 0; white-space: nowrap; }
+    .site-logo em { color: #5DCAA5; font-style: italic; }
+    .nav-links { display: flex; gap: 0; list-style: none; }
+    .nav-links a { display: block; padding: 1rem .9rem; font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .15s; white-space: nowrap; }
+    .nav-links a:hover { color: #5DCAA5; }
+    .nav-links a.active { color: #fff; }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+    .tool-nav { background: var(--white); border-bottom: 1px solid var(--border); }
+    .tool-nav ul { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; list-style: none; display: flex; gap: 0; overflow-x: auto; }
+    .tool-nav ul li a { display: block; padding: .75rem 1rem; font-size: 13px; color: var(--text-muted); text-decoration: none; border-bottom: 2px solid transparent; transition: all .15s; white-space: nowrap; }
+    .tool-nav ul li a:hover { color: var(--green); }
+    .tool-nav ul li a.active { color: var(--navy); border-bottom-color: var(--green); font-weight: 500; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --green: #1D9E75;
@@ -252,7 +266,26 @@
 </head>
 <body>
 
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-logo" href="index.html">Finance <em>Calculators</em></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy-policy.html">Privacy</a></li>
+    </ul>
+  </div>
+</nav>
 
+<nav class="tool-nav">
+  <ul>
+    <li><a href="compound-interest.html" class="active">📈 Compound Interest</a></li>
+    <li><a href="loan-payoff.html">🏦 Loan Payoff</a></li>
+    <li><a href="mortgage.html">🏠 Mortgage</a></li>
+    <li><a href="credit-card.html">💳 Credit Card</a></li>
+  </ul>
+</nav>
 
 <header>
   <h1>Compound Interest <em>Calculator</em></h1>
